@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:view>
+    <h:head>
+        <title id="title"> RafuMusic - Events Page </title>
+        <div class="topnav">
+            <h2 style="float:left;text-align:center;font-family:Helvetica; color:white; font-size: 25px;padding: 14px 16px;text-decoration: none;margin:auto;"> RafuMusic </h2>
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#match" class="active">Match</a>
+            <a href="#events">Events</a>
+        </div>
+        <h:outputStylesheet library="css" name="eventpg.css"/>
+        <h:outputStylesheet library="css" name="navbar.css" />
+
+    </h:head>
+
+    <h:body>
+
+        <div id="container3">
+            <!-- <div id="container"> -->
+            <h3 style="font-size: 35px; display:inline;"> Events Page </h3> <!-- display:inline so button can be next to text -->
+            <h:button value="+ Add Event" style="font-size:15px;" outcome="createEvent"/>
+            <!-- </div> -->
+        </div>
+        <br/>
+        <div class="list-group">
+
+            <a href="eventInfo.xhtml" class="list-group-item" > <h:graphicImage value="resources/images/empty-photo.jpg" style="width:800px;height:180px;" /> </a>
+            <!-- there should be a "Read More" button in the image -->
+            <!-- put eventID in the database itself -->
+            <!-- so have to getEvents to display all info about this specific event (retrieve function) -->
+
+
+            <h:form>
+                <p:growl id="messages" showDetail="true" />
+                <p:menuButton style="width:800px;">
+                    <p:menuitem value="Edit" actionListener="#{menuView.edit}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+                    <p:menuitem value="Delete" actionListener="#{menuView.delete}" ajax="false" icon="ui-icon-close" />
+                </p:menuButton>
+            </h:form>
+        </div>
+            <!--<p:button value="Click for more" action="eventInfo"> </p:button>-->
+
+        <br/><br/>
+
+
+        <!--<h:button value="Edit"></h:button>-->
+        <!--<h:button value="Delete"></h:button>-->
+
+
+    </h:body>
+</f:view>
+</html>
