@@ -4,8 +4,126 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-   <f:view>
-      <h:outputLabel value="Hello, world"/>
-   </f:view>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+   <h:outputStylesheet library="css" name="navbar.css"/>
+    <h:outputStylesheet library="css" name="table-style.css"  />
+   <title id="title"> RafuMusic - Match Page </title>
+   <div class="topnav">
+      <h2 style="float:left;text-align:center;font-family:Helvetica; color:white; font-size: 25px;padding: 14px 16px;text-decoration: none;margin:auto;"> RafuMusic </h2>
+      <a href="#home">Home</a>
+      <a href="#news">News</a>
+      <a href="#match" class="active">Match</a>
+      <a href="#events">Events</a>
+   </div>
+</h:head>
+
+<h:body>
+
+
+    <f:facet name="first">
+        <h:outputStylesheet library="css" name="index.css" />
+    </f:facet>
+
+   <h2 id="pagename" style="font-family:Helvetica;margin:14px;display:inline-block"> Match Page </h2>
+   <div style="display:inline-block;font-family:Helvetica;text-align: center;padding:10px;border-style:solid;border-radius:10px;box-shadow:1px 1px"> Search <h:graphicImage value="https://cdn2.iconfinder.com/data/icons/filled-icons/493/Search-512.png" style="height:15px;width:15px"/> </div>
+   <div style="display:inline-block;font-family:Helvetica;text-align: center;padding:10px;border-style:solid;border-radius:10px;box-shadow:1px 1px"> Filter </div>
+
+    <h:form id="form">
+        <p:dataGrid var="user"  value="#{dataGridView.users}" columns="3" layout="grid"
+                    rows="12" paginator="true" id="users"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="6,12,16">
+
+            <f:facet name="header">
+                Matches
+            </f:facet>
+
+
+            <p:panel header="#{user.id}" style="text-align:center">
+                <h:panelGrid columns="1" style="width:100%">
+                    <p:graphicImage name=""/>
+
+                    <h:outputText value="#{user.year}" />
+
+                    <p:commandLink update=":form:userDetail" oncomplete="PF('userDialog').show()" title="View Detail">
+                        <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                        <f:setPropertyActionListener value="#{user}" target="#{dataGridView.selectedUser}" />
+                    </p:commandLink>
+                </h:panelGrid>
+            </p:panel>
+d
+        </p:dataGrid>
+
+        <p:dialog header="Person info" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel id="userDetail" style="text-align:center;">
+                <p:panelGrid  columns="2" rendered="#{not empty dataGridView.selectedUser}" columnClasses="label,value">
+                    <f:facet name="header">
+                        <p:graphicImage name="download.jpg"/>
+                    </f:facet>
+
+                    <h:outputText value="Id:" />
+                    <h:outputText value="#{dataGridView.selectedUser.id}" />
+
+                    <h:outputText value="Year" />
+                    <h:outputText value="#{dataGridView.selectedUser.year}" />
+
+                    <h:outputText value="Price" />
+                    <h:outputText value="$#{dataGridView.selectedUser.price}" />
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+    </h:form>
+
+       <div id="igiveup" style="display: block;height:200px;width:200px;text-align: center;border-style:solid;border-radius: 10px;margin:10px">
+          Name: John <br/>
+          Genre: Rock <br/>
+           <a href="match_prof.xhtml"><h:graphicImage value="resources/images/download.jpg" height="100px" weight="100px"/></a> <br/>
+          Music Instrument: Guitar <br/>
+          Match:97% <br/>
+          Looking For: event set up <br/>
+
+
+       </div>
+    <div style="height:200px;width:200px" >
+        <h:outputText value="#{dataGridView.users.get(23).id}"> </h:outputText>
+        <h:outputText value="#{user}"/>
+    </div>
+
+
+    <h:dataTable value="#{order.orderList}" var="o"
+                 styleClass="order-table"
+                 headerClass="order-table-header"
+                 rowClasses="order-table-odd-row,order-table-even-row"
+    >
+
+        <h:column>
+            <!-- column header -->
+            <f:facet name="header">Order No</f:facet>
+            <!-- row record -->
+            #{o.orderNo}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Product Name</f:facet>
+            #{o.productName}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Price</f:facet>
+            #{o.price}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Quantity</f:facet>
+            #{o.qty}
+        </h:column>
+
+    </h:dataTable>
+
+
+
+</h:body>
 </html>
