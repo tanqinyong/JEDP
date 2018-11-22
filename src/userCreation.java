@@ -26,7 +26,7 @@ public class userCreation {
     }
 
     public int getRandomYear() {
-        System.out.println("fuckme");
+        System.out.println("me");
         return (int) (Math.random() * 50 + 1960);
     }
 

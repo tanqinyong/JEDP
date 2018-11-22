@@ -39,4 +39,18 @@ public class DataGridView implements Serializable {
     public void setSelectedUser(User selectedUser) {
         this.selectedUser = selectedUser;
     }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public userCreation getCreation() {
+        return creation;
+    }
+
+    public void setCreation(userCreation creation) {
+        this.creation = creation;
+    }
+
+
 }
